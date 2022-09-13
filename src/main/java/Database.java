@@ -14,4 +14,9 @@ public class Database {
         return x.getSuperheroName()+" "+x.getName()+" "+ x.getIsHuman() +" "+ x.getOriginYear();
 
     }
+    Superhero[] allX = new Superhero[100];
+    public void saveHeroToDatabase(int i){
+        allX[i] = this.x;
+
+    }
 }
