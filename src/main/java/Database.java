@@ -12,5 +12,6 @@ public class Database {
     }
     public String toString(){
         return x.getSuperheroName()+" "+x.getName()+" "+ x.getIsHuman() +" "+ x.getOriginYear();
+
     }
 }
