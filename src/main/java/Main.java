@@ -1,3 +1,4 @@
+import javax.lang.model.type.NullType;
 import java.util.Scanner;
 
 public class Main {
@@ -29,7 +30,14 @@ public class Main {
 
         }while(menu != 0);
 
-        System.out.println(heroes);
+        //System.out.println(heroes);
+        int i = 0;
+        do{
+            System.out.println("Superhelt: " + heroes.getSuperhero(i).getSuperheroName());
+            System.out.println("Virkelige navn: " + heroes.getSuperhero(i).getName());
+            System.out.println("Oprindelsesår: " + heroes.getSuperhero(i).getOriginYear());
+            i++;
+        }while(i<10);//while(heroes.getSuperhero(i).getName() != null);
 
     }
 }

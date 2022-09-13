@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Database {
 
-    private int index = 0;
     public Database(){
     }
     Superhero x = new Superhero();
@@ -28,6 +27,12 @@ public class Database {
 
        // return allX[i];
     //}
+    public ArrayList getSuperheroList(){
+        return allX;
+    }
+    public Superhero getSuperhero(int i){
+        return allX.get(i);
+    }
 
 
 }
