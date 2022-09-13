@@ -25,7 +25,16 @@ public class Superhero {
         return isHuman;
     }
 
-    public void setName(String Name){
+    public void setName(String name){
         this.name = name;
+    }
+    public void setSuperheroName(String superheroName){
+        this.superheroName = superheroName;
+    }
+    public void  setOriginYear(int originYear){
+        this.originYear = originYear;
+    }
+    public void  setIsHuman(boolean isHuman){
+        this.isHuman = isHuman;
     }
 }
