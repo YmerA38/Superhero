@@ -1,24 +1,16 @@
-import java.sql.SQLOutput;
-import java.util.Scanner;
-
 public class Database {
 
-    private Superhero[] alleX;
+
     public Database(){
     }
-    public void askForData(){
-
-
-
-
+    Superhero x = new Superhero();
+    public void createSuperhero(String superheroName,String name,int originYear, boolean isHuman ){
+        x.setSuperheroName(superheroName);
+        x.setName(name);
+        x.setOriginYear(originYear);
+        x.setIsHuman(isHuman);
     }
-
-    public void setDatabase(Superhero x){
-
-
+    public String toString(){
+        return x.getSuperheroName()+" "+x.getName()+" "+ x.getIsHuman() +" "+ x.getOriginYear();
     }
-
-
-
-
 }
