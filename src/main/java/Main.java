@@ -8,7 +8,7 @@ public class Main {
         Database heroesDatabase = new Database();
         Scanner userInput = new Scanner(System.in);
 
-
+        heroesDatabase.createTestList(); //husk at slette, kun ti testbrug
         int menu;
         do {
             System.out.println("Opret superhelt = 1, søg = 2, print = 3, Afslut = 0");
@@ -19,11 +19,16 @@ public class Main {
                 String superheroName = userInput.nextLine();
                 System.out.println("What is superheros personal name?");
                 String name = userInput.nextLine();
-                System.out.println("What is superheros origin year ?");
+                System.out.println("What is heroes superpower?");
+                String superPower = userInput.next();
+                System.out.println("What is superheros origin year?");
                 int originYear = userInput.nextInt();
-                System.out.println("What is superheros a human   ?");
+                System.out.println("What is superheros a human?");
                 boolean isHuman = userInput.nextBoolean();
-                heroesDatabase.createSuperhero(superheroName, name, originYear, isHuman);
+                System.out.println("What is superheros strength (time a normal human)?");
+                double strength = userInput.nextDouble();
+
+                heroesDatabase.createSuperhero(superheroName,name,superPower,originYear,isHuman,strength);
             }
             if(menu == 2){
                 System.out.println("Indtast søgeord");
@@ -37,7 +42,9 @@ public class Main {
                 do{
                     System.out.println("Superhelt: " + heroesDatabase.getSuperhero(i).getSuperheroName());
                     System.out.println("Virkelige navn: " + heroesDatabase.getSuperhero(i).getName());
-                    System.out.println("Oprindelsesår: " + heroesDatabase.getSuperhero(i).getOriginYear() + "\n =============");
+                    System.out.println("Superkraft: "+ heroesDatabase.getSuperhero(i).getSuperPower());
+                    System.out.println("Oprindelsesår: " + heroesDatabase.getSuperhero(i).getOriginYear() + "\n"+
+                            "Styrketal: "+heroesDatabase.getSuperhero(i).getStrength()+"\n=====================");
                     i++;
                 }while(i< heroesDatabase.getSuperheroList().size());
             }
