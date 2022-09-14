@@ -37,7 +37,7 @@ public class Main {
             System.out.println("Virkelige navn: " + heroes.getSuperhero(i).getName());
             System.out.println("Oprindelsesår: " + heroes.getSuperhero(i).getOriginYear());
             i++;
-        }while(i<10);//while(heroes.getSuperhero(i).getName() != null);
+        }while(i< heroes.getSuperheroList().size());//while(heroes.getSuperhero(i).getName() != null);
 
     }
 }

@@ -19,7 +19,7 @@ public class Database {
         return list;
     }
     //Superhero[] allX = new Superhero[100];
-    ArrayList<Superhero> allX = new ArrayList<>();
+    private ArrayList<Superhero> allX = new ArrayList<>();
     public void saveHeroToDatabase(){
         allX.add(x);
     }
@@ -31,6 +31,7 @@ public class Database {
         return allX;
     }
     public Superhero getSuperhero(int i){
+
         return allX.get(i);
     }
 
