@@ -11,7 +11,7 @@ public class Main {
 
         int menu;
         do {
-            System.out.println("Opret superhelt = 1, søg = 2, Afslut = 0");
+            System.out.println("Opret superhelt = 1, søg = 2, print = 3, Afslut = 0");
             menu = userInput.nextInt();
             if(menu==1) {
                 userInput.nextLine();//efter en ny nextInt bug
@@ -30,7 +30,15 @@ public class Main {
                 String search = userInput.nextLine();
 
                 System.out.println(heroesDatabase.searchSuperhero(search));
-
+            }
+            if(menu == 3){
+                int i = 0;
+                do{
+                    System.out.println("Superhelt: " + heroesDatabase.getSuperhero(i).getSuperheroName());
+                    System.out.println("Virkelige navn: " + heroesDatabase.getSuperhero(i).getName());
+                    System.out.println("Oprindelsesår: " + heroesDatabase.getSuperhero(i).getOriginYear() + "\n =============");
+                    i++;
+                }while(i< heroesDatabase.getSuperheroList().size());
             }
 
         }while(menu != 0);
