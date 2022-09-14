@@ -5,12 +5,14 @@ public class Superhero {
     private boolean isHuman;
 
     public Superhero(){}
-    /*public Superhero(String name,String superheroName,int originYear,boolean isHuman ){
+
+    public Superhero(String superheroName,String name,int originYear,boolean isHuman ) {
         this.name = name;
         this.superheroName = superheroName;
         this.originYear = originYear;
         this.isHuman = isHuman;
-    }*/
+    }
+
 
     public String getName(){
         return name;

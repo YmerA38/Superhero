@@ -7,11 +7,8 @@ public class Database {
     }
 
     public void createSuperhero(String superheroName,String name,int originYear, boolean isHuman ){
-        Superhero hero = new Superhero();
-        hero.setSuperheroName(superheroName);
-        hero.setName(name);
-        hero.setOriginYear(originYear);
-        hero.setIsHuman(isHuman);
+        Superhero hero = new Superhero(superheroName,name,originYear,isHuman);
+
         allHeroeList.add(hero);
     }
     public String toString(){
@@ -24,10 +21,7 @@ public class Database {
     //
     private ArrayList<Superhero> allHeroeList = new ArrayList<>();
 
-    //public Superhero getSuperheros(int i){
 
-       // return allX[i];
-    //}
     public ArrayList getSuperheroList(){
         return allHeroeList;
     }
@@ -36,12 +30,16 @@ public class Database {
         return allHeroeList.get(i);
     }
 
-    public Superhero seachSuperhero(String search){
+    public Superhero searchSuperhero(String search){
         for(Superhero hero : allHeroeList){
+            if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
+                return hero;
+            }
 
         }
-
         return null;
+
+
     }
 
 

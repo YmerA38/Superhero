@@ -5,13 +5,13 @@ public class Main {
 
     public static void main(String[] Args){
 
-        Database heroes = new Database();
+        Database heroesDatabase = new Database();
         Scanner userInput = new Scanner(System.in);
 
 
         int menu;
         do {
-            System.out.println("Opret superhelt = 1, Afslut = 0");
+            System.out.println("Opret superhelt = 1, søg = 2, Afslut = 0");
             menu = userInput.nextInt();
             if(menu==1) {
                 userInput.nextLine();//efter en ny nextInt bug
@@ -23,31 +23,20 @@ public class Main {
                 int originYear = userInput.nextInt();
                 System.out.println("What is superheros a human   ?");
                 boolean isHuman = userInput.nextBoolean();
-                heroes.createSuperhero(superheroName, name, originYear, isHuman);
+                heroesDatabase.createSuperhero(superheroName, name, originYear, isHuman);
+            }
+            if(menu == 2){
+                System.out.println("Indtast søgeord");
+                String search = userInput.nextLine();
+
+                System.out.println(heroesDatabase.searchSuperhero(search));
 
             }
 
         }while(menu != 0);
 
-        //System.out.println(heroes);
-        int i = 0;
-        do{
-            System.out.println("Superhelt: " + heroes.getSuperhero(i).getSuperheroName());
-            System.out.println("Virkelige navn: " + heroes.getSuperhero(i).getName());
-            System.out.println("Oprindelsesår: " + heroes.getSuperhero(i).getOriginYear() + "\n =============");
-            i++;
-        }while(i< heroes.getSuperheroList().size());//Database-object.metode der returnerer liste. metode på liste
 
-        System.out.println("Vil du søge efter superhelt tast 5, afslut tast 0");
-        menu = userInput.nextInt();
-        if(menu == 5){
-            i=0;
-            System.out.println("Indtast søgeord");
-            String search = userInput.nextLine();
-            while(search != heroes.getSuperhero(i).getSuperheroName()){
-                i++;
-            }
-        }
+
 
 
 
