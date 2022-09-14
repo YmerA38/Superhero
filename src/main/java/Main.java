@@ -27,6 +27,7 @@ public class Main {
             }
             if(menu == 2){
                 System.out.println("Indtast søgeord");
+                userInput.nextLine();//efter en ny nextInt bug
                 String search = userInput.nextLine();
 
                 System.out.println(heroesDatabase.searchSuperhero(search));

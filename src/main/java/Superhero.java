@@ -39,4 +39,7 @@ public class Superhero {
     public void  setIsHuman(boolean isHuman){
         this.isHuman = isHuman;
     }
+    public String toString(){
+       return "Superhero " + superheroName + "\nName " + name + "\nYear: "+ originYear;
+    }
 }
