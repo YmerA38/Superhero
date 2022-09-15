@@ -51,6 +51,6 @@ public class Superhero {
     }
     public String toString(){
        return "Superhero " + superheroName + "\nName " + name + "\nSuperpower: " + superPower+ "\nYear: "+ originYear+
-               "\nStrength: " + strength;
+               "\nStrength: " + strength +"\n==========================";
     }
 }

@@ -54,7 +54,16 @@ public class UserInterface {
         System.out.println("Indtast søgeord");
         userInput.nextLine();//efter en ny nextInt bug
         String search = userInput.nextLine();
-        System.out.println(heroesDatabase.searchSuperhero(search));
+        if(heroesDatabase.searchSuperhero(search) != null){
+            int i = 0;
+            do {
+                System.out.println(heroesDatabase.searchSuperhero(search).get(i));
+                i++;
+            }while (i<heroesDatabase.searchSuperhero(search).size());
+        }else{
+            System.out.println("No search mach!!");
+        }
+
     }
     private void printAll(){
         int i = 0;
