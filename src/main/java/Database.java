@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 
 public class Database {
-    private ArrayList<Superhero> allHeroeList = new ArrayList<>();
+    private ArrayList<Superhero> allHeroeList;
+    private ArrayList<Superhero> seachResultList;
 
     public Database(){
+        allHeroeList = new ArrayList<>();
     }
 
     public void createSuperhero(String superheroName,String name, String superPower,int originYear, boolean isHuman,double strength ){
@@ -36,7 +38,7 @@ public class Database {
         return allHeroeList.get(i);
     }
 
-    public Superhero searchSuperhero(String search){
+    public Superhero searchSuperheroOne(String search){
         for(Superhero hero : allHeroeList){
             if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
                 return hero;
@@ -44,5 +46,21 @@ public class Database {
 
         }
         return null;
+    }
+    public ArrayList<Superhero> searchSuperhero(String search){
+        seachResultList = new ArrayList<>();
+        for(Superhero hero : allHeroeList){
+            if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
+                seachResultList.add(hero);
+
+            }
+
+        }
+        if(seachResultList.size()>0){
+            return seachResultList;
+        }else{
+            return null;
+        }
+
     }
 }

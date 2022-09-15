@@ -9,13 +9,6 @@ public class Main {
         uI.startUserInterface();
 
 
-
-
-
-
-
-
-
         // next()charAt(0)
         // seach.equals(.....) er to strenge ens
         // .getNam().contais(search)
