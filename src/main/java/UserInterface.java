@@ -57,7 +57,7 @@ public class UserInterface {
         if(heroesDatabase.searchSuperhero(search) != null){
             int i = 0;
             do {
-                System.out.println(heroesDatabase.searchSuperhero(search).get(i));
+                printObject(heroesDatabase.searchSuperhero(search).get(i));
                 i++;
             }while (i<heroesDatabase.searchSuperhero(search).size());
         }else{
@@ -75,6 +75,13 @@ public class UserInterface {
                     "Styrketal: "+heroesDatabase.getSuperhero(i).getStrength()+"\n=====================");
             i++;
         }while(i < heroesDatabase.getSuperheroList().size());
+    }
+    private void printObject(Superhero hero){
+        System.out.println("Superhelt: " + hero.getSuperheroName()+"\n"+
+                            "Virkelige navn: " + hero.getName()+"\n"+
+                            "Superkraft: "+ hero.getSuperPower()+"\n"+
+                            "Oprindelsesår: " + hero.getOriginYear() + "\n"+
+                            "Styrketal: "+hero.getStrength()+"\n=====================");
     }
 
 
