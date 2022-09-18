@@ -63,4 +63,11 @@ public class Database {
         }
 
     }
+    public void editHero(int index){
+        getSuperhero(index);
+
+    }
+
+
+
 }

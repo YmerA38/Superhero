@@ -45,7 +45,12 @@ public class UserInterface {
         System.out.println("What is superheros origin year?");
         int originYear = userInput.nextInt();
         System.out.println("What is superheros a human?");
-        boolean isHuman = userInput.nextBoolean();
+        userInput.nextLine();//efter en ny nextInt bug
+        char isHumanChar = userInput.nextLine().charAt(0);
+        boolean isHuman;
+        if(isHumanChar=='j'||isHumanChar=='J'){
+            isHuman = true;
+        }else{ isHuman = false;}
         System.out.println("What is superheros strength (time a normal human)?");
         double strength = userInput.nextDouble();
         heroesDatabase.createSuperhero(superheroName,name,superPower,originYear,isHuman,strength);
@@ -77,11 +82,15 @@ public class UserInterface {
         }while(i < heroesDatabase.getSuperheroList().size());
     }
     private void printObject(Superhero hero){
-        System.out.println("Superhelt: " + hero.getSuperheroName()+"\n"+
-                            "Virkelige navn: " + hero.getName()+"\n"+
-                            "Superkraft: "+ hero.getSuperPower()+"\n"+
-                            "Oprindelsesår: " + hero.getOriginYear() + "\n"+
-                            "Styrketal: "+hero.getStrength()+"\n=====================");
+        System.out.println("Superhelt: " + hero.getSuperheroName()+"\n"+ "Virkelige navn: " + hero.getName()+"\n"+
+                "Superkraft: "+ hero.getSuperPower()+"\n"+ "Oprindelsesår: " + hero.getOriginYear() );
+        if(hero.getIsHuman()==true){
+            System.out.println("Art: Menneske");
+        }else{
+            System.out.println("Art: Ikke menneske");
+
+        }
+        System.out.println("Styrketal: "+hero.getStrength()+"\n=====================");
     }
 
 
