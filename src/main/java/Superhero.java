@@ -43,11 +43,17 @@ public class Superhero {
     public void setSuperheroName(String superheroName){
         this.superheroName = superheroName;
     }
+    public void setSuperPower(String superPower){
+        this.superPower = superPower;
+    }
     public void  setOriginYear(int originYear){
         this.originYear = originYear;
     }
     public void  setIsHuman(boolean isHuman){
         this.isHuman = isHuman;
+    }
+    public void setStrength(double strength){
+        this.strength = strength;
     }
     public String toString(){
        return "Superhero " + superheroName + "\nName " + name + "\nSuperpower: " + superPower+ "\nYear: "+ originYear+

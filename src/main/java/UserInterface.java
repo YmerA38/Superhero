@@ -101,8 +101,54 @@ public class UserInterface {
             System.out.printf("Nr. %4d....%s\n", i+1, heroesDatabase.getSuperhero(i).getSuperheroName() );
         }
         System.out.println("Vælg Nr på den helt du gerne vil rette");
-        int valg = userInput.nextInt();
-        //heroesDatabase.editHero(valg);
+        String chooseHeroString = userInput.nextLine();//TODO sikre mod indtastnigsfejl
+        int chooseHero = 0;
+        boolean entryError = false; //Ttil at fange indtastningsfejl
+        do{
+            try {
+                chooseHero = Integer.parseInt(chooseHeroString);
+                entryError = false;
+            } catch (NumberFormatException ex) {
+                System.out.println("");
+                entryError = true;
+            }
+        }while(entryError == true);
+
+        Superhero chosenHero = heroesDatabase.getSuperhero(chooseHero);
+        System.out.println("Indtast din ændring, eller tast enter for at skippe");
+
+        System.out.println("Superhelt: "+chosenHero.getSuperheroName());
+        if(userInput.nextLine().isEmpty()==false)
+        heroesDatabase.getSuperhero(chooseHero).setSuperheroName(userInput.nextLine());
+        System.out.println("Navn: "+heroesDatabase.getSuperhero(chooseHero).getName());
+        if(userInput.nextLine().isEmpty()==false)
+        heroesDatabase.getSuperhero(chooseHero).setName(userInput.nextLine());
+        System.out.println("Superkraft: "+heroesDatabase.getSuperhero(chooseHero).getSuperPower());
+        if(userInput.nextLine().isEmpty()==false)
+        heroesDatabase.getSuperhero(chooseHero).setSuperPower(userInput.nextLine());
+        System.out.println("oprindelsesår: "+heroesDatabase.getSuperhero(chooseHero).getOriginYear());
+        if(userInput.nextLine().isEmpty()==false) {
+            heroesDatabase.getSuperhero(chooseHero).setOriginYear(userInput.nextInt());
+        }
+        System.out.println("Er menneske [j/n]: "+heroesDatabase.getSuperhero(chooseHero).getIsHuman());
+        if(userInput.nextLine().isEmpty()==false) {
+            if (userInput.nextLine().toLowerCase().contains("j")) {
+                heroesDatabase.getSuperhero(chooseHero).setIsHuman(true);
+            } else {
+                heroesDatabase.getSuperhero(chooseHero).setIsHuman(false);
+            }
+        }
+        System.out.println("Superkraft: "+heroesDatabase.getSuperhero(chooseHero).getStrength());
+        if(userInput.nextLine().isEmpty()==false){
+            heroesDatabase.getSuperhero(chooseHero).setStrength(userInput.nextDouble());
+        }
+
+
+
+
+
+
     }
+
 
 }
