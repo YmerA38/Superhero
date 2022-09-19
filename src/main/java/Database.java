@@ -34,7 +34,6 @@ public class Database {
         return allHeroeList;
     }
     public Superhero getSuperhero(int i){
-
         return allHeroeList.get(i);
     }
 
@@ -63,7 +62,7 @@ public class Database {
         }
 
     }
-    public void editHero(int index){
+    public void editHero(int index){ //TODO skal jeg lave denne metode
         getSuperhero(index);
 
     }

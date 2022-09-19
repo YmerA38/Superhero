@@ -10,6 +10,7 @@ public class UserInterface {
     public void startUserInterface(){
         heroesDatabase = new Database(); // assigner instansen
         heroesDatabase.createTestList(); //TODO husk at slette, kun til  testbrug
+
         menu();
     }
 
@@ -73,6 +74,7 @@ public class UserInterface {
     private void printAll(){
         int i = 0;
         do{
+            System.out.println("Nr: " + i +1);
             System.out.println("Superhelt: " + heroesDatabase.getSuperhero(i).getSuperheroName());
             System.out.println("Virkelige navn: " + heroesDatabase.getSuperhero(i).getName());
             System.out.println("Superkraft: "+ heroesDatabase.getSuperhero(i).getSuperPower());
@@ -92,7 +94,16 @@ public class UserInterface {
         }
         System.out.println("Styrketal: "+hero.getStrength()+"\n=====================");
     }
-
-
+    /*private void editHero(){
+        for(Superhero hero : heroesDatabase.getSuperheroList()){
+        }*/
+    private void editHeroInterface(){
+        for(int i=0; i< heroesDatabase.getSuperheroList().size();i++){
+            System.out.printf("Nr. %4d....%s\n", i+1, heroesDatabase.getSuperhero(i).getSuperheroName() );
+        }
+        System.out.println("Vælg Nr på den helt du gerne vil rette");
+        int valg = userInput.nextInt();
+        heroesDatabase.editHero(valg);
+    }
 
 }
