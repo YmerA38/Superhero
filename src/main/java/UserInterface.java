@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -27,11 +28,14 @@ public class UserInterface {
             if(menu == 3){
                 printAll();
             }
+            if(menu == 4){
+                editHero();
+            }
 
         }while(menu != 0);
     }
     private int askUserInput(){
-        System.out.println("Opret superhelt = 1, søg = 2, print = 3, Afslut = 0");
+        System.out.println("Opret superhelt = 1, søg = 2, print = 3, edit = 4, Afslut = 0");
         return userInput.nextInt();
     }
     private void userDefinedSuperhero(){
@@ -73,7 +77,7 @@ public class UserInterface {
     private void printAll(){
         int i = 0;
         do{
-            System.out.println("Nr: " + i +1);
+            System.out.println("Nr: " + (i+1));
             System.out.println("Superhelt: " + heroesDatabase.getSuperhero(i).getSuperheroName());
             System.out.println("Virkelige navn: " + heroesDatabase.getSuperhero(i).getName());
             System.out.println("Superkraft: "+ heroesDatabase.getSuperhero(i).getSuperPower());
@@ -96,10 +100,13 @@ public class UserInterface {
     /*private void editHero(){
         for(Superhero hero : heroesDatabase.getSuperheroList()){
         }*/
-    private void editHeroInterface(){
-        for(int i=0; i< heroesDatabase.getSuperheroList().size();i++){
-            System.out.printf("Nr. %4d....%s\n", i+1, heroesDatabase.getSuperhero(i).getSuperheroName() );
+    private void editHero(){
+        ArrayList<Superhero> list = heroesDatabase.getSuperheroList();
+        int i = 0;
+        for(Superhero hero : list ) {
+            System.out.printf("Nr. %4d....%s\n", (i + 1), hero.getSuperheroName());
         }
+
         System.out.println("Vælg Nr på den helt du gerne vil rette");
         String chooseHeroString = userInput.nextLine();//TODO sikre mod indtastnigsfejl
         int chooseHero = 0;
@@ -114,23 +121,27 @@ public class UserInterface {
             }
         }while(entryError == true);
 
-        Superhero chosenHero = heroesDatabase.getSuperhero(chooseHero);
+        Superhero selectedHero = heroesDatabase.getSuperhero(chooseHero);
         System.out.println("Indtast din ændring, eller tast enter for at skippe");
 
-        System.out.println("Superhelt: "+chosenHero.getSuperheroName());
+        System.out.println("Superhelt: "+selectedHero.getSuperheroName());
         if(userInput.nextLine().isEmpty()==false)
-        heroesDatabase.getSuperhero(chooseHero).setSuperheroName(userInput.nextLine());
-        System.out.println("Navn: "+heroesDatabase.getSuperhero(chooseHero).getName());
+        selectedHero.setSuperheroName(userInput.nextLine());
+        System.out.println("Navn: "+selectedHero.getName());
         if(userInput.nextLine().isEmpty()==false)
-        heroesDatabase.getSuperhero(chooseHero).setName(userInput.nextLine());
-        System.out.println("Superkraft: "+heroesDatabase.getSuperhero(chooseHero).getSuperPower());
+        selectedHero.setName(userInput.nextLine());
+        System.out.println("Superkraft: "+selectedHero.getSuperPower());
         if(userInput.nextLine().isEmpty()==false)
-        heroesDatabase.getSuperhero(chooseHero).setSuperPower(userInput.nextLine());
-        System.out.println("oprindelsesår: "+heroesDatabase.getSuperhero(chooseHero).getOriginYear());
+        selectedHero.setSuperPower(userInput.nextLine());
+        System.out.println("oprindelsesår: "+selectedHero.getOriginYear());
         if(userInput.nextLine().isEmpty()==false) {
-            heroesDatabase.getSuperhero(chooseHero).setOriginYear(userInput.nextInt());
+            do {
+                if (userInput.hasNextInt())
+                    selectedHero.setOriginYear(userInput.nextInt());
+                else System.out.println("Fejl i indtastning!! \nprøv igen");
+            }while (!userInput.hasNextInt());
         }
-        System.out.println("Er menneske [j/n]: "+heroesDatabase.getSuperhero(chooseHero).getIsHuman());
+        System.out.println("Er menneske [j/n]: "+selectedHero.getIsHuman());
         if(userInput.nextLine().isEmpty()==false) {
             if (userInput.nextLine().toLowerCase().contains("j")) {
                 heroesDatabase.getSuperhero(chooseHero).setIsHuman(true);
