@@ -102,39 +102,41 @@ public class UserInterface {
         }*/
     private void editHero(){
         ArrayList<Superhero> list = heroesDatabase.getSuperheroList();
-        int i = 0;
+        int i = 1;
         for(Superhero hero : list ) {
-            System.out.printf("Nr. %4d....%s\n", (i + 1), hero.getSuperheroName());
+            System.out.printf("Nr. %4d....%s\n", i, hero.getSuperheroName());
+            i++;
         }
 
-        System.out.println("Vælg Nr på den helt du gerne vil rette");
-        String chooseHeroString = userInput.nextLine();//TODO sikre mod indtastnigsfejl
+        userInput.nextLine();//bugfix
         int chooseHero = 0;
         boolean entryError = false; //Ttil at fange indtastningsfejl
         do{
+            System.out.println("Vælg Nr på den helt du gerne vil rette");
+            String chooseHeroString = userInput.nextLine();
             try {
                 chooseHero = Integer.parseInt(chooseHeroString);
                 entryError = false;
             } catch (NumberFormatException ex) {
-                System.out.println("");
+                System.out.println("fel i indtsastning");
                 entryError = true;
             }
         }while(entryError == true);
 
-        Superhero selectedHero = heroesDatabase.getSuperhero(chooseHero);
+        Superhero selectedHero = heroesDatabase.getSuperhero(chooseHero-1);
         System.out.println("Indtast din ændring, eller tast enter for at skippe");
 
         System.out.println("Superhelt: "+selectedHero.getSuperheroName());
-        if(userInput.nextLine().isEmpty()==false)
-        selectedHero.setSuperheroName(userInput.nextLine());
+        if(!userInput.nextLine().isEmpty()){
+        selectedHero.setSuperheroName(userInput.nextLine());}
         System.out.println("Navn: "+selectedHero.getName());
-        if(userInput.nextLine().isEmpty()==false)
-        selectedHero.setName(userInput.nextLine());
+        if(!userInput.nextLine().isEmpty()){
+        selectedHero.setName(userInput.nextLine());}
         System.out.println("Superkraft: "+selectedHero.getSuperPower());
-        if(userInput.nextLine().isEmpty()==false)
-        selectedHero.setSuperPower(userInput.nextLine());
+        if(!userInput.nextLine().isEmpty()){
+        selectedHero.setSuperPower(userInput.nextLine());}
         System.out.println("oprindelsesår: "+selectedHero.getOriginYear());
-        if(userInput.nextLine().isEmpty()==false) {
+        if(!userInput.nextLine().isEmpty()) {
             do {
                 if (userInput.hasNextInt())
                     selectedHero.setOriginYear(userInput.nextInt());
@@ -142,21 +144,19 @@ public class UserInterface {
             }while (!userInput.hasNextInt());
         }
         System.out.println("Er menneske [j/n]: "+selectedHero.getIsHuman());
-        if(userInput.nextLine().isEmpty()==false) {
+        if(!userInput.nextLine().isEmpty()) {
             if (userInput.nextLine().toLowerCase().contains("j")) {
                 heroesDatabase.getSuperhero(chooseHero).setIsHuman(true);
             } else {
                 heroesDatabase.getSuperhero(chooseHero).setIsHuman(false);
             }
         }
-        System.out.println("Superkraft: "+heroesDatabase.getSuperhero(chooseHero).getStrength());
-        if(userInput.nextLine().isEmpty()==false){
-            heroesDatabase.getSuperhero(chooseHero).setStrength(userInput.nextDouble());
+        System.out.println("Styrke: "+selectedHero.getStrength());
+        if(!userInput.nextLine().isEmpty()){
+            if(userInput.hasNextDouble()) {
+                heroesDatabase.getSuperhero(chooseHero).setStrength(userInput.nextDouble());
+            }
         }
-
-
-
-
 
 
     }
