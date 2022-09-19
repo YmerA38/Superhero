@@ -10,7 +10,6 @@ public class UserInterface {
     public void startUserInterface(){
         heroesDatabase = new Database(); // assigner instansen
         heroesDatabase.createTestList(); //TODO husk at slette, kun til  testbrug
-
         menu();
     }
 
@@ -103,7 +102,7 @@ public class UserInterface {
         }
         System.out.println("Vælg Nr på den helt du gerne vil rette");
         int valg = userInput.nextInt();
-        heroesDatabase.editHero(valg);
+        //heroesDatabase.editHero(valg);
     }
 
 }

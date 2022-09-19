@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 public class Database {
-    private ArrayList<Superhero> allHeroeList;
-    private ArrayList<Superhero> seachResultList;
+    private ArrayList<Superhero> allHeroeList = new ArrayList<>();
 
     public Database(){
         allHeroeList = new ArrayList<>();
@@ -34,20 +33,13 @@ public class Database {
         return allHeroeList;
     }
     public Superhero getSuperhero(int i){
+
         return allHeroeList.get(i);
     }
 
-    public Superhero searchSuperheroOne(String search){
-        for(Superhero hero : allHeroeList){
-            if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
-                return hero;
-            }
 
-        }
-        return null;
-    }
     public ArrayList<Superhero> searchSuperhero(String search){
-        seachResultList = new ArrayList<>();
+        ArrayList<Superhero> seachResultList = new ArrayList<>();
         for(Superhero hero : allHeroeList){
             if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
                 seachResultList.add(hero);
