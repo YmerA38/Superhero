@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Database {
     private ArrayList<Superhero> allHeroList;
+    private ArrayList<Superhero> searchResultList;
 
     public Database(){
         allHeroList = new ArrayList<>();
@@ -39,7 +40,7 @@ public class Database {
 
 
     public ArrayList<Superhero> searchSuperhero(String search){
-        ArrayList<Superhero> searchResultList = new ArrayList<>();
+        searchResultList = new ArrayList<>();
         for(Superhero hero : allHeroList){
             if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
                 searchResultList.add(hero);
