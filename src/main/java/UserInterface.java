@@ -19,24 +19,36 @@ public class UserInterface {
         int menu;
         do {
             menu = askUserInput();
-            if(menu==1) {
-                userDefinedSuperhero();
-            }
-            if(menu == 2){
-                searchDatabase();
-            }
-            if(menu == 3){
-                printAll();
-            }
-            if(menu == 4){
-                editHero();
+            switch (menu) {
+                case 1:
+                    userDefinedSuperhero();
+                    break;
+                case 2:
+                    searchDatabase();
+                    break;
+                case 3:
+                    printAll();
+                    break;
+                case 4:
+                    editHero();
+                    break;
+                default:
+                    break;
             }
 
         }while(menu != 0);
     }
     private int askUserInput(){
-        System.out.println("Opret superhelt = 1, søg = 2, print = 3, edit = 4, Afslut = 0");
-        return userInput.nextInt();
+        System.out.println("Opret superhelt = 1\nSøg = 2\nPrint = 3\nEdit = 4\nAfslut = 0");
+        int menuChoice = 0;
+        try {
+            String menuChoiceString = userInput.nextLine();
+            menuChoice = Integer.parseInt(menuChoiceString);
+        } catch (NumberFormatException ex){
+            System.out.println("fejl i indtastning");
+            // hertil
+        }
+        return menuChoice;
     }
     private void userDefinedSuperhero(){
         userInput.nextLine();//efter en ny nextInt bug
@@ -141,9 +153,14 @@ public class UserInterface {
                 if (userInput.hasNextInt())
                     selectedHero.setOriginYear(userInput.nextInt());
                 else System.out.println("Fejl i indtastning!! \nprøv igen");
-            }while (!userInput.hasNextInt());
+            }while (!userInput.hasNextInt()||userInput.nextLine().isEmpty());
         }
-        System.out.println("Er menneske [j/n]: "+selectedHero.getIsHuman());
+        System.out.print("Er menneske [j/n]: "+selectedHero.getIsHuman());
+        if(selectedHero.getIsHuman()){
+            System.out.println("Ja");
+        }else{
+            System.out.println("Nej");
+        }
         if(!userInput.nextLine().isEmpty()) {
             if (userInput.nextLine().toLowerCase().contains("j")) {
                 heroesDatabase.getSuperhero(chooseHero).setIsHuman(true);
@@ -153,9 +170,13 @@ public class UserInterface {
         }
         System.out.println("Styrke: "+selectedHero.getStrength());
         if(!userInput.nextLine().isEmpty()){
-            if(userInput.hasNextDouble()) {
-                heroesDatabase.getSuperhero(chooseHero).setStrength(userInput.nextDouble());
-            }
+            do {
+                if (userInput.hasNextDouble()) {
+                    heroesDatabase.getSuperhero(chooseHero).setStrength(userInput.nextDouble());
+                } else {
+                    System.out.println("indtastinigsfejl");
+                }
+            }while(!userInput.hasNextDouble()||userInput.nextLine().isEmpty());
         }
 
 
