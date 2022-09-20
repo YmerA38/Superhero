@@ -123,7 +123,7 @@ public class UserInterface {
             i++;
         }
 
-        userInput.nextLine();//bugfix
+        //userInput.nextLine();//bugfix
         int chooseHero = 0;
         boolean entryError;
         do{
@@ -140,16 +140,18 @@ public class UserInterface {
 
         Superhero selectedHero = heroesDatabase.getSuperhero(chooseHero-1);
         System.out.println("Indtast din ændring, eller tast enter for at skippe");
-        userInput.nextLine();//bugfix
+        //userInput.nextLine();//bugfix
         System.out.println("Superhelt: "+selectedHero.getSuperheroName());
         if(!userInput.nextLine().isEmpty()){
-            userInput.nextLine();//bugfix
-        selectedHero.setSuperheroName(userInput.nextLine());}
-        userInput.nextLine();//bugfix
+            //userInput.nextLine();//bugfix
+        selectedHero.setSuperheroName(userInput.nextLine());
+        }
+        //userInput.nextLine();//bugfix
         System.out.println("Navn: "+selectedHero.getName());
         if(!userInput.nextLine().isEmpty()){
-            userInput.nextLine();//bugfix
-        selectedHero.setName(userInput.nextLine());}
+            //userInput.nextLine();//bugfix
+        selectedHero.setName(userInput.nextLine());
+        }
         userInput.nextLine();//bugfix
         System.out.println("Superkraft: "+selectedHero.getSuperPower());
         if(!userInput.nextLine().isEmpty()){
