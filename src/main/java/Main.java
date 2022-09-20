@@ -11,8 +11,8 @@ public class Main {
 
         // next()charAt(0)
         // seach.equals(.....) er to strenge ens
-        // .getNam().contais(search)
-        // .getNam().toLowerCase.contais(search.toLowerCase)
+        // .getName().contais(search)
+        // .getName().toLowerCase.contais(search.toLowerCase)
         //" ".equalsIgnorCase("")
         // Integer.parseInt("")
     }
