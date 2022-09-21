@@ -32,6 +32,9 @@ public class UserInterface {
                 case 4:
                     editHero();
                     break;
+                case 5:
+                    deleteHero();
+                    break;
                 default:
                     break;
             }
@@ -77,7 +80,7 @@ public class UserInterface {
     }
     private void searchDatabase(){
         System.out.println("Indtast søgeord");
-        userInput.nextLine();//efter en ny nextInt bug
+        //userInput.nextLine();//efter en ny nextInt bug
         String search = userInput.nextLine();
         if(heroesDatabase.searchSuperhero(search) != null){
             int i = 0;
@@ -152,13 +155,14 @@ public class UserInterface {
             //userInput.nextLine();//bugfix
         selectedHero.setName(userInput.nextLine());
         }
-        userInput.nextLine();//bugfix
+
         System.out.println("Superkraft: "+selectedHero.getSuperPower());
         if(!userInput.nextLine().isEmpty()){
-            userInput.nextLine();//bugfix
-        selectedHero.setSuperPower(userInput.nextLine());}
+
+        selectedHero.setSuperPower(userInput.nextLine());
+        }
+        // OPRINDELSESÅR INT
         System.out.println("oprindelsesår: "+selectedHero.getOriginYear());
-        userInput.nextLine();//bugfix
         if(!userInput.nextLine().isEmpty()) {
             do {
                 if (userInput.hasNextInt())
@@ -173,7 +177,7 @@ public class UserInterface {
             System.out.println("Nej");
         }
         if(!userInput.nextLine().isEmpty()) {
-            if (userInput.nextLine().toLowerCase().contains("j")) {
+            if(userInput.nextLine().toLowerCase().contains("j")) {
                 heroesDatabase.getSuperhero(chooseHero).setIsHuman(true);
             } else {
                 heroesDatabase.getSuperhero(chooseHero).setIsHuman(false);
@@ -192,6 +196,24 @@ public class UserInterface {
 
 
     }
-
+    public void deleteHero(){
+        int i=0;
+        String searchWord = userInput.nextLine();
+        //hertil
+        ArrayList<Superhero> resultList = heroesDatabase.searchSuperhero(searchWord);
+        i = 0;
+        for(Superhero hero: resultList){
+            System.out.println(i+" "+hero.getName());
+            i++;
+        }
+        i = userInput.nextInt();
+        Superhero heroToDelete = heroesDatabase.getSuperhero(i);
+        boolean success = heroesDatabase.deleteSuperhero(heroToDelete);
+        if(success){
+            System.out.println(heroToDelete+" blev slettet");
+        }else{
+            System.out.println("fel!! "+heroToDelete+" blev ikke slettet");
+        }
+    }
 
 }

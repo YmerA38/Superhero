@@ -5,7 +5,7 @@ public class Database {
     private ArrayList<Superhero> searchResultList;
 
     public Database(){
-        allHeroList = new ArrayList<>();
+    allHeroList = new ArrayList<>();
     }
 
     public void createSuperhero(String superheroName,String name, String superPower,int originYear, boolean isHuman,double strength ){
@@ -41,19 +41,28 @@ public class Database {
 
     public ArrayList<Superhero> searchSuperhero(String search){
         searchResultList = new ArrayList<>();
+        if(search.isEmpty()){
+            return null;
+        }
         for(Superhero hero : allHeroList){
             if(hero.getSuperheroName().toLowerCase().contains(search.toLowerCase())){
                 searchResultList.add(hero);
-
             }
-
         }
         if(searchResultList.size()>0){
             return searchResultList;
         }else{
             return null;
         }
+    }
 
+    public boolean deleteSuperhero(Superhero heroToDelete){
+        boolean isDon = false;
+        allHeroList.remove(heroToDelete);
+        if(!allHeroList.contains(heroToDelete)){ //hvis object ikke længere er i listen så..
+            isDon = true; // ...er vi færdige
+        }
+        return isDon;
     }
 
 }
