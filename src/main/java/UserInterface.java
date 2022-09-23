@@ -42,7 +42,7 @@ public class UserInterface {
         }while(menu != 0);
     }
     private int askUserInput(){
-        System.out.println("1...Opret superhelt\n2...Søg efter superhelt\n3...Print alle superhelte\n" +
+        System.out.println("\n     --MENU--\n1...Opret superhelt\n2...Søg efter superhelt\n3...Print alle superhelte\n" +
                 "4...Rediger superhelt\n5...Slet superhelt \n0...Afslut program");
         return giveMeInt();
     }
@@ -66,13 +66,13 @@ public class UserInterface {
         String searchWord = userInput.nextLine();
         if(heroesDatabase.searchSuperhero(searchWord) != null){
             ArrayList<Superhero> list = heroesDatabase.searchSuperhero(searchWord);
-            heronameAndNumberFromList(list);
+            System.out.println(heronameAndNumberFromList(list));
             int choice;
             do{
                 System.out.println("Vælg nr på den du vil se, eller tryk 0 for at fortsætte");
                 choice = giveMeInt();
                 if(choice>0&&choice<= list.size()){
-                    printObject(list.get(choice));
+                    printObject(list.get(choice-1));
                 }else{choice=0;}
             }while(choice!=0);
         }else{
@@ -105,7 +105,7 @@ public class UserInterface {
     private void editHero(){
         String input;
         ArrayList<Superhero> list = heroesDatabase.getSuperheroList();
-        heronameAndNumberFromList(list);
+        System.out.println(heronameAndNumberFromList(list));
         System.out.println("Vælg Nr på den helt du gerne vil rette");
         int chooseHero = giveMeInt();
         Superhero selectedHero = list.get(chooseHero-1);
@@ -129,7 +129,7 @@ public class UserInterface {
         if(!userInput.nextLine().isEmpty()) {
            selectedHero.setOriginYear(giveMeInt());
         }
-        System.out.print("Er menneske [j/n]: "+selectedHero.getIsHuman());
+        System.out.print("Er menneske [j/n]: ");
         if(selectedHero.getIsHuman()){
             System.out.println("Ja");
         }else{
@@ -151,14 +151,15 @@ public class UserInterface {
         System.out.println("Indtast Nr på den du ønsker at slette");
         int i = giveMeInt();
         Superhero heroToDelete = resultList.get(i-1);
+        String deletedHero = heroToDelete.getSuperheroName();
         boolean success = heroesDatabase.deleteSuperhero(heroToDelete);
         if(success){
-            System.out.println(heroToDelete+" blev slettet");
+            System.out.println(deletedHero+" blev slettet");
         }else{
-            System.out.println("fel!! "+heroToDelete+" blev ikke slettet");
+            System.out.println("fel!! "+deletedHero+" blev ikke slettet");
         }
     }
-    //TODO
+
     private int giveMeInt(){
         int intOutput = 0;
         boolean entryError;
@@ -171,7 +172,7 @@ public class UserInterface {
                 entryError = true;
             }
         }while(entryError);
-        userInput.nextLine();//scanner bugfix
+       // userInput.nextLine();//scanner bugfix
         return intOutput;
     }
     private double giveMeDouble(){

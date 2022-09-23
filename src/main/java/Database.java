@@ -19,7 +19,7 @@ public class Database {
         allHeroList.add(new Superhero("GåIkioskenMand","John","At gå i kiosken efter smøger",1945,true,0.85));
         allHeroList.add(new Superhero("Lotte","Lotte","at blive usynlig",1982,true,0.5));
         allHeroList.add(new Superhero("VandMand","Intet navn","at ligge i vandet",2022,false,0.0001));
-        allHeroList.add(new Superhero("FranskMand","Piare","at være arrogant",1968,true,1));
+        allHeroList.add(new Superhero("FranskMand","Pier","at være arrogant",1968,true,1));
         allHeroList.add(new Superhero("HeMan","Hermand"," at være et dårlig forbillede for drengebørn",1982,true,2));
     }
     public String toString(){
