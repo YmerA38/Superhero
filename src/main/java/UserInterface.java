@@ -141,8 +141,9 @@ public class UserInterface {
             selectedHero.setIsHuman(giveMeBoolean(input));
         }
         System.out.println("Styrke: "+selectedHero.getStrength());
-        if(!userInput.nextLine().isEmpty()){
-            selectedHero.setStrength(giveMeDouble());
+        input = userInput.nextLine();
+        if(!input.isEmpty()){
+            selectedHero.setStrength(giveMeDouble(input));
         }
     }
     public void deleteHero(){
