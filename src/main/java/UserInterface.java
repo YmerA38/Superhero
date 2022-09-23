@@ -126,8 +126,9 @@ public class UserInterface {
         selectedHero.setSuperPower(input);
         }
         System.out.println("oprindelsesår: "+selectedHero.getOriginYear());
-        if(!userInput.nextLine().isEmpty()) {
-           selectedHero.setOriginYear(giveMeInt());
+        input = userInput.nextLine();
+        if(!input.isEmpty()) {
+           selectedHero.setOriginYear(giveMeInt(input));
         }
         System.out.print("Er menneske [j/n]: ");
         if(selectedHero.getIsHuman()){
@@ -172,7 +173,26 @@ public class UserInterface {
                 entryError = true;
             }
         }while(entryError);
-       // userInput.nextLine();//scanner bugfix
+        return intOutput;
+    }
+    private int giveMeInt(String input){ //overdrive
+        int intOutput = 0;
+        boolean entryError;
+        try{
+            intOutput = Integer.parseInt(input);
+        }catch (NumberFormatException ex1){
+            System.out.println("fel i indtsastning\n prøv igen");
+            do {
+                try {
+                    intOutput = Integer.parseInt(userInput.nextLine().trim());
+                    entryError = false;
+                } catch (NumberFormatException ex2) {
+                    System.out.println("fel i indtsastning\n prøv igen");
+                    entryError = true;
+                }
+            } while (entryError);
+        }
+
         return intOutput;
     }
     private double giveMeDouble(){
@@ -187,6 +207,26 @@ public class UserInterface {
                 entryError = true;
             }
         }while(entryError);
+        return intOutput;
+    }
+    private double giveMeDouble(String input){ //overdrive
+        double intOutput = 0;
+        boolean entryError;
+        try{
+            intOutput = Double.parseDouble(input);
+        }catch (NumberFormatException ex1){
+            System.out.println("fel i indtsastning\n prøv igen");
+            do {
+                try {
+                    intOutput = Double.parseDouble(userInput.nextLine().trim());
+                    entryError = false;
+                } catch (NumberFormatException ex2) {
+                    System.out.println("fel i indtsastning\n prøv igen");
+                    entryError = true;
+                }
+            } while (entryError);
+        }
+
         return intOutput;
     }
     public boolean giveMeBoolean(String inputString){
