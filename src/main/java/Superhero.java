@@ -6,7 +6,7 @@ public class Superhero {
     private boolean isHuman;
     private double strength;
 
-    public Superhero(){}
+
 
     public Superhero(String superheroName,String name,String superPower,int originYear,boolean isHuman, double strength ) {
         this.name = name;

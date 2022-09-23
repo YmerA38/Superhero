@@ -150,15 +150,18 @@ public class UserInterface {
         System.out.println("Indtast søgeord for den superhelt du vil slette");
         ArrayList<Superhero> resultList = heroesDatabase.searchSuperhero(userInput.nextLine().trim());
         System.out.println(heronameAndNumberFromList(resultList));
+
         System.out.println("Indtast Nr på den du ønsker at slette");
         int i = giveMeInt();
-        Superhero heroToDelete = resultList.get(i-1);
-        String deletedHero = heroToDelete.getSuperheroName();
-        boolean success = heroesDatabase.deleteSuperhero(heroToDelete);
-        if(success){
-            System.out.println(deletedHero+" blev slettet");
-        }else{
-            System.out.println("fel!! "+deletedHero+" blev ikke slettet");
+        if(i>0&&i<=resultList.size()){
+            Superhero heroToDelete = resultList.get(i-1);
+            String deletedHero = heroToDelete.getSuperheroName();
+            boolean success = heroesDatabase.deleteSuperhero(heroToDelete);
+            if(success){
+                System.out.println(deletedHero+" blev slettet");
+            }else {
+                System.out.println("fel!! " + deletedHero + " blev ikke slettet");
+            }
         }
     }
 
