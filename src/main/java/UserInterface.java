@@ -249,5 +249,4 @@ public class UserInterface {
         }
         return outputString;
     }
-
 }
