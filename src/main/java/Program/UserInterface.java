@@ -1,18 +1,30 @@
+package Program;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     Scanner userInput = new Scanner(System.in);
-    private Database heroesDatabase; // erklærer en instans
+
+    private Controler controler;
 
     public UserInterface(){
     }
 
     public void startUserInterface(){
-        heroesDatabase = new Database(); // assigner instansen
-        heroesDatabase.createTestList(); //TODO husk at slette, kun til  testbrug
+        controler = new Controler();
+        //controler.createTestList(); //TODO husk at slette, kun til  testbrug
+        try {
+            if (controler.load()) {
+                System.out.println("file has been loaded");
+            }
+        }catch(FileNotFoundException x){
+            System.out.println("file not found, program ends");
+        }
         menu();
     }
+
 
     public void menu(){
 
@@ -35,19 +47,93 @@ public class UserInterface {
                 case 5:
                     deleteHero();
                     break;
+                case 6:
+                    save();
+                    break;
+                case 7:
+                    load();
+                    break;
+                case 8:
+                    sort();
+                    break;
+                case 0:
+                    endProgram();
                 default:
                     break;
             }
 
         }while(menu != 0);
     }
+
+    public void sort(){
+        System.out.println(" 1...Sort by name\n 2...Sort by other criteria\n 3...Sort by two criteria");
+        int choice = giveMeInt();
+        switch (choice){
+            case 1 -> controler.sort();
+            case 2 ->{
+                System.out.println("Chose a criteria you want to sort by\n" +
+                        " 1...Superhero Name\n 2...Real Name\n 3...Is Human\n 4...Super Power\n" +
+                        " 5...Strength\n 6...Origin Year");
+
+                controler.sort(giveMeHeroAtribute(giveMeInt()));
+            }
+            case 3 ->{
+                System.out.println("Chose primary criteria: \n" +
+                        " 1...Superhero Name\n 2...Real Name\n 3...Is Human\n 4...Super Power\n" +
+                        " 5...Strength\n 6...Origin Year");
+            int first = giveMeInt();
+                System.out.println("Chose secondary criteria: \n" +
+                        " 1...Superhero Name\n 2...Real Name\n 3...Is Human\n 4...Super Power\n" +
+                        " 5...Strength\n 6...Origin Year");
+            int second = giveMeInt();
+
+            controler.sort(giveMeHeroAtribute(first),giveMeHeroAtribute(second));
+
+            }
+        }
+    }
+
+    private void load() {
+        try {
+            if (controler.load()) {
+                System.out.println("file has been loaded");
+            }
+        }catch(FileNotFoundException x){
+            System.out.println("file not found, program ends");
+        }
+    }
+
+    private void endProgram() {
+        System.out.println("do you want to save [y/n]");
+        if(giveMeBoolean(userInput.nextLine())){
+            save();
+        }else{
+            //TODO End program
+        }
+    }
+
+    private void save() {
+        boolean isSaved = false;
+        try{
+           isSaved = controler.save();
+        }catch(FileNotFoundException x){
+            System.out.println("not successful");
+        }
+        if (isSaved) {
+            System.out.println("Saved successfully");
+        } else {
+            System.out.println("not saved");
+        }
+
+    }
+
     private int askUserInput(){
-        System.out.println("\n     --MENU--\n1...Opret superhelt\n2...Søg efter superhelt\n3...Print alle superhelte\n" +
-                "4...Rediger superhelt\n5...Slet superhelt \n0...Afslut program");
+        System.out.println("\n     --MENU--\n1...Add new superhero\n2...Search for superhero\n3...Printout all superheroes\n" +
+                "4...Edit super hero\n5...Delete superhero\n6...Save\n7...Load from last save\n8...Sorter superheroes \n0...End program");
         return giveMeInt();
     }
     private void userDefinedSuperhero(){
-        System.out.println("What is superheros suprhero name?");
+        System.out.println("What is superheros superhero name?");
         String superheroName = userInput.nextLine();
         System.out.println("What is superheros personal name?");
         String name = userInput.nextLine();
@@ -59,14 +145,14 @@ public class UserInterface {
         boolean isHuman = giveMeBoolean(userInput.nextLine());
         System.out.println("What is superheros strength (time a normal human)?");
         double strength = giveMeDouble();
-        heroesDatabase.createSuperhero(superheroName,name,superPower,originYear,isHuman,strength);
+        controler.createSuperhero(superheroName,name,superPower,originYear,isHuman,strength);
     }
     private void searchDatabase(){
         System.out.println("Indtast søgeord");
         String searchWord = userInput.nextLine();
-        if(heroesDatabase.searchSuperhero(searchWord) != null){
-            ArrayList<Superhero> list = heroesDatabase.searchSuperhero(searchWord);
-            System.out.println(heronameAndNumberFromList(list));
+        if(controler.searchSuperhero(searchWord) != null){
+            ArrayList<Superhero> list = controler.searchSuperhero(searchWord);
+            System.out.println(heroNameAndNumberFromList(list));
             int choice;
             do{
                 System.out.println("Vælg nr på den du vil se, eller tryk 0 for at fortsætte");
@@ -82,15 +168,18 @@ public class UserInterface {
     }
     private void printAll(){
         int i = 0;
-        do{
+        while(i < controler.getSuperheroList().size()){
             System.out.println("Nr: " + (i+1));
-            System.out.println("Superhelt: " + heroesDatabase.getSuperhero(i).getSuperheroName());
-            System.out.println("Virkelige navn: " + heroesDatabase.getSuperhero(i).getName());
-            System.out.println("Superkraft: "+ heroesDatabase.getSuperhero(i).getSuperPower());
-            System.out.println("Oprindelsesår: " + heroesDatabase.getSuperhero(i).getOriginYear() + "\n"+
-                    "Styrketal: "+heroesDatabase.getSuperhero(i).getStrength()+"\n=====================");
+            System.out.println("Superhelt: " + controler.getSuperhero(i).getSuperheroName());
+            System.out.println("Virkelige navn: " + controler.getSuperhero(i).getName());
+            System.out.println("Er menneske?: "+ controler.getSuperhero(i).getIsHuman());
+            System.out.println("Superkraft: "+ controler.getSuperhero(i).getSuperPower());
+            System.out.println("Oprindelsesår: " + controler.getSuperhero(i).getOriginYear() + "\n"+
+                    "Styrketal: "+controler.getSuperhero(i).getStrength()+"\n=====================");
             i++;
-        }while(i < heroesDatabase.getSuperheroList().size());
+        }
+        if(controler.getSuperheroList().isEmpty())
+            System.out.println("No Superheroes in list");
     }
     private void printObject(Superhero hero){
         System.out.println("Superhelt: " + hero.getSuperheroName()+"\n"+ "Virkelige navn: " + hero.getName()+"\n"+
@@ -104,8 +193,8 @@ public class UserInterface {
     }
     private void editHero(){
         String input;
-        ArrayList<Superhero> list = heroesDatabase.getSuperheroList();
-        System.out.println(heronameAndNumberFromList(list));
+        ArrayList<Superhero> list = controler.getSuperheroList();
+        System.out.println(heroNameAndNumberFromList(list));
         System.out.println("Vælg Nr på den helt du gerne vil rette");
         int chooseHero = giveMeInt();
         Superhero selectedHero = list.get(chooseHero-1);
@@ -148,15 +237,15 @@ public class UserInterface {
     }
     public void deleteHero(){
         System.out.println("Indtast søgeord for den superhelt du vil slette");
-        ArrayList<Superhero> resultList = heroesDatabase.searchSuperhero(userInput.nextLine().trim());
-        System.out.println(heronameAndNumberFromList(resultList));
+        ArrayList<Superhero> resultList = controler.searchSuperhero(userInput.nextLine().trim());
+        System.out.println(heroNameAndNumberFromList(resultList));
 
         System.out.println("Indtast Nr på den du ønsker at slette");
         int i = giveMeInt();
         if(i>0&&i<=resultList.size()){
             Superhero heroToDelete = resultList.get(i-1);
             String deletedHero = heroToDelete.getSuperheroName();
-            boolean success = heroesDatabase.deleteSuperhero(heroToDelete);
+            boolean success = controler.deleteSuperhero(heroToDelete);
             if(success){
                 System.out.println(deletedHero+" blev slettet");
             }else {
@@ -234,13 +323,27 @@ public class UserInterface {
         return intOutput;
     }
     public boolean giveMeBoolean(String inputString){
-        if(inputString.toLowerCase().trim().charAt(0) == 'j') {
+        char firsChar = inputString.toLowerCase().trim().charAt(0);
+        if(firsChar == 'j'||firsChar == 'y'||firsChar == 't') {
             return true;
         } else {
             return false;
         }
     }
-    public String heronameAndNumberFromList(ArrayList<Superhero> list){
+
+    public HeroAttribute giveMeHeroAtribute(int input){
+        switch (input){
+            case 1 ->{return HeroAttribute.SUPERHERO_NAME;}
+            case 2 ->{return HeroAttribute.NAME;}
+            case 3 ->{return HeroAttribute.IS_HUMAN;}
+            case 4 ->{return HeroAttribute.SUPER_POWER;}
+            case 5 ->{return HeroAttribute.STRENGTH;}
+            case 6 ->{return HeroAttribute.ORIGIN_YEAR;}
+            default -> {return null;}
+        }
+    }
+
+    public String heroNameAndNumberFromList(ArrayList<Superhero> list){
         int i = 1;
         String outputString ="";
         for(Superhero hero: list){
@@ -249,4 +352,6 @@ public class UserInterface {
         }
         return outputString;
     }
+
+
 }

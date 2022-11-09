@@ -1,3 +1,5 @@
+import Program.Database;
+import Program.Superhero;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +43,7 @@ class DatabaseTest {
         //Arrange
         Database database = new Database();
         database.createTestList();
-        //ArrayList<Superhero> expected = null;
+        //ArrayList<Program.Superhero> expected = null;
         //Act
         ArrayList<Superhero> actual = database.searchSuperhero("Xxx");
         //Assert
@@ -96,11 +98,11 @@ class DatabaseTest {
 
         //Har vi fjernet "BoligMand"?
         //Arrange
-        ArrayList<Superhero> expectedS = null;
+
         //Act
         ArrayList<Superhero> actualS = database.searchSuperhero("BoligMand");
         //Assert
-        assertEquals(expectedS,actualS);
+
         assertNull(actualS);
     }
 }

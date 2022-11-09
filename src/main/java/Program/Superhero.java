@@ -1,4 +1,6 @@
-public class Superhero {
+package Program;
+
+public class Superhero implements Comparable<Superhero>{
     private String superheroName;
     private String name;
     private String superPower;
@@ -56,7 +58,11 @@ public class Superhero {
         this.strength = strength;
     }
     public String toString(){
-       return "Superhero " + superheroName + "\nName " + name + "\nSuperpower: " + superPower+ "\nYear: "+ originYear+
+       return "Program.Superhero " + superheroName + "\nName " + name + "\nSuperpower: " + superPower+ "\nYear: "+ originYear+
                "\nStrength: " + strength +"\n==========================";
+    }
+
+    public int compareTo(Superhero h){
+        return superheroName.compareTo(h.getSuperheroName());
     }
 }

@@ -1,11 +1,15 @@
+package Program;
+
 import java.util.ArrayList;
 
 public class Database {
     private ArrayList<Superhero> allHeroList;
     private ArrayList<Superhero> searchResultList;
+    private boolean changeMade;
 
     public Database(){
     allHeroList = new ArrayList<>();
+    changeMade = false;
     }
 
     public void createSuperhero(String superheroName,String name, String superPower,int originYear, boolean isHuman,double strength ){
@@ -54,6 +58,7 @@ public class Database {
         }else{
             return null;
         }
+
     }
 
     public boolean deleteSuperhero(Superhero heroToDelete){
