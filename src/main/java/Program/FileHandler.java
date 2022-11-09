@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class FileHandler  {
     private final String FILE_NAME = "Data/save.csv";
-    public boolean save(ArrayList<Superhero> superheroList)throws FileNotFoundException {
+    public void save(ArrayList<Superhero> superheroList)throws FileNotFoundException {
 
-        //CSV file
+
         PrintStream toCsvFile = new PrintStream(FILE_NAME);
         for(Superhero superhero: superheroList){
             toCsvFile.println(superhero.getSuperheroName()+";"+superhero.getName()+";"+superhero.getSuperPower()+
@@ -20,7 +20,6 @@ public class FileHandler  {
         toCsvFile.flush();
         toCsvFile.close();
 
-        return true; // TODO check om der er blevet skrevet til fil
     }
 
     public boolean load(ArrayList<Superhero> superheroList)throws FileNotFoundException{

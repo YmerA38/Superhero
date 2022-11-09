@@ -122,7 +122,7 @@ public class UserInterface {
         if (isSaved) {
             System.out.println("Saved successfully");
         } else {
-            System.out.println("not saved");
+            System.out.println("No changes has been made, and nothing was therefor saved");
         }
 
     }
@@ -202,22 +202,26 @@ public class UserInterface {
         System.out.println("Superhelt: "+selectedHero.getSuperheroName());
         input = userInput.nextLine();
         if(!input.trim().isEmpty()){
-        selectedHero.setSuperheroName(input);
+            selectedHero.setSuperheroName(input);
+            controler.changesMade();
         }
         System.out.println("Navn: "+selectedHero.getName());
         input = userInput.nextLine();
         if(!input.trim().isEmpty()){
-        selectedHero.setName(input);
+            selectedHero.setName(input);
+            controler.changesMade();
         }
         System.out.println("Superkraft: "+selectedHero.getSuperPower());
         input = userInput.nextLine();
         if(!input.trim().isEmpty()){
-        selectedHero.setSuperPower(input);
+            selectedHero.setSuperPower(input);
+            controler.changesMade();
         }
         System.out.println("oprindelsesår: "+selectedHero.getOriginYear());
         input = userInput.nextLine();
         if(!input.isEmpty()) {
            selectedHero.setOriginYear(giveMeInt(input));
+           controler.changesMade();
         }
         System.out.print("Er menneske [j/n]: ");
         if(selectedHero.getIsHuman()){
@@ -228,11 +232,13 @@ public class UserInterface {
         input = userInput.nextLine();
         if(!input.isEmpty()){
             selectedHero.setIsHuman(giveMeBoolean(input));
+            controler.changesMade();
         }
         System.out.println("Styrke: "+selectedHero.getStrength());
         input = userInput.nextLine();
         if(!input.isEmpty()){
             selectedHero.setStrength(giveMeDouble(input));
+            controler.changesMade();
         }
     }
     public void deleteHero(){

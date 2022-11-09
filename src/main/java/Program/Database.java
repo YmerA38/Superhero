@@ -16,6 +16,7 @@ public class Database {
         Superhero hero = new Superhero(superheroName,name,superPower,originYear,isHuman,strength);
 
         allHeroList.add(hero);
+        changeMade = true;
     }
 
     public void createTestList(){
@@ -42,6 +43,13 @@ public class Database {
         return allHeroList.get(i);
     }
 
+    public boolean isChangeMade() {
+        return changeMade;
+    }
+
+    public void changeMade() {
+        this.changeMade = true;
+    }
 
     public ArrayList<Superhero> searchSuperhero(String search){
         searchResultList = new ArrayList<>();
@@ -62,12 +70,13 @@ public class Database {
     }
 
     public boolean deleteSuperhero(Superhero heroToDelete){
-        boolean isDon = false;
+
         allHeroList.remove(heroToDelete);
         if(!allHeroList.contains(heroToDelete)){ //hvis object ikke længere er i listen så..
-            isDon = true; // ...er vi færdige
+            changeMade = true;
+            return true; // ...er vi færdige
         }
-        return isDon;
+        return false;
     }
 
 }

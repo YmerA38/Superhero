@@ -105,4 +105,32 @@ class DatabaseTest {
 
         assertNull(actualS);
     }
+    @Test
+    public void testIsSetToChangeMade(){
+        //Arrange
+        //expected = false
+        //Act
+        //no action
+        boolean actual = database.isChangeMade();
+        //Assert
+        assertFalse(actual);
+        //Arrange
+        //expected = true
+        actual = false;
+        //Act
+        deleteSuperhero();
+        actual = database.isChangeMade();
+        //Assert
+        assertTrue(actual);
+        //Arrange
+        //expected = false
+        actual = false;
+        //Act
+        database.createSuperhero("t","t","t",1,true,1);
+        actual = database.isChangeMade();
+        //Assert
+        assertTrue(actual);
+
+
+    }
 }

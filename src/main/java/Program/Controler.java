@@ -41,8 +41,12 @@ public class Controler {
     }
 
     public boolean save() throws FileNotFoundException {
-        return fileHandler.save(heroesDatabase.getSuperheroList());
-
+        if(heroesDatabase.isChangeMade()) {
+            fileHandler.save(heroesDatabase.getSuperheroList());
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public boolean load() throws FileNotFoundException {
@@ -68,5 +72,8 @@ public class Controler {
             case SUPER_POWER ->  {return new SuperPowerComparator();}
             default -> {return null;}
         }
+    }
+    public void changesMade(){
+        heroesDatabase.changeMade();
     }
 }
