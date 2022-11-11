@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Controler {
+public class Controller {
     private Database heroesDatabase;
     private FileHandler fileHandler;
 
-    public Controler(){
+    public Controller(){
         heroesDatabase = new Database();
         fileHandler = new FileHandler();
     }

@@ -7,14 +7,14 @@ import java.util.Scanner;
 public class UserInterface {
     Scanner userInput = new Scanner(System.in);
 
-    private Controler controler;
+    private Controller controler;
 
     public UserInterface(){
     }
 
     public void startUserInterface(){
-        controler = new Controler();
-        //controler.createTestList(); //TODO husk at slette, kun til  testbrug
+        controler = new Controller();
+        //controller.createTestList(); //TODO husk at slette, kun til  testbrug
         try {
             if (controler.load()) {
                 System.out.println("file has been loaded");
